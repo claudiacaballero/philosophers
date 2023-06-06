@@ -6,13 +6,13 @@
 #    By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 16:35:08 by ccaballe          #+#    #+#              #
-#    Updated: 2023/06/06 16:40:25 by ccaballe         ###   ########.fr        #
+#    Updated: 2023/06/06 18:52:45 by ccaballe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CFLAGS = -Wall -Wextra -Werror -MMD
-SRC = main.c 
+SRC = main.c utils.c 
 
 OBJ_DIR = objects/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
@@ -22,6 +22,10 @@ RM = rm -rf
 GREEN = \033[1;92m
 RED = \033[1;91m
 NC = \033[0m
+
+$(OBJ_DIR)%.o: %.c Makefile
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I./ -c $< -o $@
 
 all: $(NAME)
 

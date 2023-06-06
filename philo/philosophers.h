@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:41:04 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/06 17:35:09 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:20:21 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>
-# include <thread.h>
+
 
 typedef struct s_philo
 {
@@ -36,9 +36,11 @@ typedef struct s_params
 }	t_params;
 
 //main
-void	ft_error(char *s);
+int		init_simulation(int ac, char **av, t_params *params);
 
 //utils
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
+void	free_list(t_params *params);
+int		ft_error(char *s, t_params *params);
 
 #endif
