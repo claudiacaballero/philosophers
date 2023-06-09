@@ -6,17 +6,17 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:33:16 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/06 19:22:08 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:39:41 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_atoi(char *str)
+long int	ft_atol(char *str)
 {
-	int	i;
-	int	neg;
-	int	res;
+	int			i;
+	long int	neg;
+	long int	res;
 
 	i = 0;
 	neg = 1;
@@ -37,21 +37,9 @@ int	ft_atoi(char *str)
 	return (neg * res);
 }
 
-void	free_list(t_params *params)
-{
-	t_philo	*tmp;
-
-	while (params->philo)
-	{
-		tmp = params->philo->next;
-		free(params->philo);
-		params->philo = tmp;
-	}
-}
-
 int	ft_error(char *s, t_params *params)
 {
 	printf("%s\n", s);
-	free_list(params);
+	free(params->philo);
 	return (-1);
 }

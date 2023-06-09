@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:41:04 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/06 19:20:21 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:41:29 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,30 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>
-
+# include <pthread.h>
 
 typedef struct s_philo
 {
 	int				num;
-	int				last_ate;
-	struct s_philo	*next;
+	long int		last_ate;
 }	t_philo;
 
 typedef struct s_params
 {
-	int		num_philosophers;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		number_meals;
-	t_philo	*philo;
+	int				num_philo;
+	long int		time_to_die;
+	long int		time_to_eat;
+	long int		time_to_sleep;
+	long int		number_meals;
+	t_philo			*philo;
 }	t_params;
 
 //main
-int		init_simulation(int ac, char **av, t_params *params);
+int			init_simulation(int ac, char **av, t_params *params);
 
 //utils
-int		ft_atoi(char *str);
-void	free_list(t_params *params);
-int		ft_error(char *s, t_params *params);
+long int	ft_atol(char *str);
+void		free_list(t_params *params);
+int			ft_error(char *s, t_params *params);
 
 #endif
