@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/09 17:40:08 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:57:32 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 		return (ft_error("ERROR\nExpected 4 or 5 arguments", &params));
 	if (init_simulation(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
+	create_threads(&params);
 	free(params.philo);
 	return (0);
 }
@@ -44,6 +45,17 @@ int	init_simulation(int ac, char **av, t_params *params)
 		params->philo[i].num = i + 1;
 		params->philo[i].last_ate = 0;
 	}
+	//forquilles ?????
+	//hora on comença per saber quanta estona ha passat
 	return (0);
 }
-  
+
+int	create_threads(t_params *params)
+{
+	int	i;
+
+	i = -1;
+	while (++i < params->num_philo)
+		//start thread
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:41:04 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/09 17:41:29 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:02:36 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_philo
 {
+	pthread_t		*id;
 	int				num;
 	long int		last_ate;
 }	t_philo;
