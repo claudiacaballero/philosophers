@@ -6,13 +6,13 @@
 #    By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 16:35:08 by ccaballe          #+#    #+#              #
-#    Updated: 2023/06/06 18:52:45 by ccaballe         ###   ########.fr        #
+#    Updated: 2023/06/15 17:21:15 by ccaballe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CFLAGS = -Wall -Wextra -Werror -MMD
-SRC = main.c utils.c 
+SRC = main.c utils.c routines.c
 
 OBJ_DIR = objects/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))

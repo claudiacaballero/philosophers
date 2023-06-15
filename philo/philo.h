@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:41:04 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/13 16:02:36 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:14:27 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -20,7 +20,7 @@
 
 typedef struct s_philo
 {
-	pthread_t		*id;
+	pthread_t		*thread;
 	int				num;
 	long int		last_ate;
 }	t_philo;
@@ -37,10 +37,14 @@ typedef struct s_params
 
 //main
 int			init_simulation(int ac, char **av, t_params *params);
+int			create_threads(t_params *params);
 
 //utils
 long int	ft_atol(char *str);
 void		free_list(t_params *params);
 int			ft_error(char *s, t_params *params);
+
+//routines
+void		*start_routine();
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/13 17:57:32 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:47:58 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 int	main(int ac, char **av)
 {
@@ -44,9 +44,9 @@ int	init_simulation(int ac, char **av, t_params *params)
 	{
 		params->philo[i].num = i + 1;
 		params->philo[i].last_ate = 0;
+		//aixo hauria de ser gettimeofday
 	}
 	//forquilles ?????
-	//hora on comença per saber quanta estona ha passat
 	return (0);
 }
 
@@ -56,6 +56,6 @@ int	create_threads(t_params *params)
 
 	i = -1;
 	while (++i < params->num_philo)
-		//start thread
+		pthread_create(params->philo[i].thread, NULL, start_routine, NULL);
 	return (0);
 }
