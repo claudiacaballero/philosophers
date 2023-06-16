@@ -17,10 +17,11 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {
-	pthread_t		*thread;
+	pthread_t		thread;
 	int				num;
 	long int		last_ate;
 }	t_philo;

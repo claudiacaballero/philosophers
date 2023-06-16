@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/15 17:47:58 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:45:37 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int ac, char **av)
 	if (init_simulation(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
+	// while (nadie muera)
+	// 	cosas
 	free(params.philo);
 	return (0);
 }
@@ -46,7 +48,7 @@ int	init_simulation(int ac, char **av, t_params *params)
 		params->philo[i].last_ate = 0;
 		//aixo hauria de ser gettimeofday
 	}
-	//forquilles ?????
+	//forquilles ????? mutex (?)
 	return (0);
 }
 
@@ -56,6 +58,9 @@ int	create_threads(t_params *params)
 
 	i = -1;
 	while (++i < params->num_philo)
-		pthread_create(params->philo[i].thread, NULL, start_routine, NULL);
+	{
+		pthread_create(&params->philo[i].thread, NULL, start_routine, NULL);
+		usleep(10);
+	}
 	return (0);
 }
