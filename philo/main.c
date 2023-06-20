@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/19 18:17:07 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:20:35 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	main(int ac, char **av)
 	//checkear q siguin digits
 	if (init_params(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
-	if (init_arrays(&params) == -1)
-		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
 	// while (nadie muera)
 	// 	cosas
+	while (1)
+		;
 	usleep(1000);
 	ft_free(&params);
 	return (0);
@@ -59,8 +59,12 @@ int	init_arrays(t_params *params)
 	{
 		params->philo[i].num = i + 1;
 		params->philo[i].params = params;
-		params->philo[i].last_ate = 0; //aixo hauria de ser gettimeofday
+		params->philo[i].last_ate = get_time();
 		params->philo[i].ate_count = 0;
+		params->philo[i].l_fork = i;
+		params->philo[i].r_fork = i + 1;
+		if (i == params->num_philo - 1)
+			params->philo[i].r_fork = 0;
 	}
 	params->forks = malloc(sizeof(pthread_mutex_t) * params->num_philo);
 	if (!params->forks)

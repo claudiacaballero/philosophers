@@ -27,6 +27,8 @@ typedef struct s_philo
 	int				num;
 	long int		last_ate;
 	long int		ate_count;
+	int				l_fork;
+	int				r_fork;
 	t_params		*params;
 }	t_philo;
 
@@ -52,6 +54,7 @@ long int	ft_atol(char *str);
 void		free_list(t_params *params);
 int			ft_error(char *s, t_params *params);
 void		ft_free(t_params *params);
+long int	get_time(void);
 
 //routines
 void		*routine(t_philo *philo);

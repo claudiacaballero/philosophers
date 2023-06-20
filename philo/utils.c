@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:33:16 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/19 18:06:30 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:59:07 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,12 @@ void	ft_free(t_params *params)
 	while (++i < params->num_philo)
 		pthread_mutex_destroy(&params->forks[i]);
 	free(params->forks);
+}
+
+long int	get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
