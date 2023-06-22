@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/20 17:20:35 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:17:47 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int	main(int ac, char **av)
 	if (init_params(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
-	// while (nadie muera)
-	// 	cosas
-	while (1)
-		;
+	while (params.dead == 0)
+	{
+		int i = -1;
+		while (++i < params.num_philo)
+			check_dead(&params.philo[i]);
+	}
 	usleep(1000);
 	ft_free(&params);
 	return (0);
@@ -40,6 +42,7 @@ int	init_params(int ac, char **av, t_params *params)
 	params->time_to_sleep = ft_atol(av[4]);
 	params->number_meals = 0;
 	params->dead = 0;
+	params->start = get_time();
 	if (ac == 6)
 		params->number_meals = ft_atol(av[5]);
 	if (init_arrays(params) == -1)

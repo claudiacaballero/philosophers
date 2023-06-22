@@ -34,6 +34,7 @@ typedef struct s_philo
 
 struct s_params
 {
+	long int		start;
 	long int		num_philo;
 	long int		time_to_die;
 	long int		time_to_eat;
@@ -59,7 +60,7 @@ long int	get_time(void);
 //routines
 void		*routine(t_philo *philo);
 void		eat(t_philo *philo);
-// void		sleep(t_philo *philo);
-// void		think(t_philo *philo);
+void		sleep_think(t_philo *philo);
+int			check_dead(t_philo *philo);
 
 #endif
