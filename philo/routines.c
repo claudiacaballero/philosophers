@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:17:01 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/22 16:20:53 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:10:35 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ int	check_dead(t_philo *philo)
 		return (1);
 	}
 	return (0);
+}
+
+int	die(t_params *params)
+{
+	//posar el kill count desde params directament aixi no es necessita mutex pel kc
+	// ???? preguntarho
 }
