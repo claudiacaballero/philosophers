@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/22 16:17:47 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:06:55 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ int	main(int ac, char **av)
 	if (init_params(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
-	while (params.dead == 0)
+	int d = 0;
+	while (d == 0)
 	{
 		int i = -1;
 		while (++i < params.num_philo)
-			check_dead(&params.philo[i]);
+			if (params.philo[i].dead == 1)
+				d = 1;
 	}
 	usleep(1000);
 	ft_free(&params);
@@ -41,7 +43,7 @@ int	init_params(int ac, char **av, t_params *params)
 	params->time_to_eat = ft_atol(av[3]);
 	params->time_to_sleep = ft_atol(av[4]);
 	params->number_meals = 0;
-	params->dead = 0;
+	pthread_mutex_init(&params->print, NULL);
 	params->start = get_time();
 	if (ac == 6)
 		params->number_meals = ft_atol(av[5]);
@@ -61,6 +63,7 @@ int	init_arrays(t_params *params)
 	while (++i < params->num_philo)
 	{
 		params->philo[i].num = i + 1;
+		params->philo[i].dead = 0;
 		params->philo[i].params = params;
 		params->philo[i].last_ate = get_time();
 		params->philo[i].ate_count = 0;

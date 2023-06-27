@@ -29,6 +29,7 @@ typedef struct s_philo
 	long int		ate_count;
 	int				l_fork;
 	int				r_fork;
+	int				dead;
 	t_params		*params;
 }	t_philo;
 
@@ -40,9 +41,9 @@ struct s_params
 	long int		time_to_eat;
 	long int		time_to_sleep;
 	long int		number_meals;
-	int				dead;
 	t_philo			*philo;
-	pthread_mutex_t	*forks;		
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
 };
 
 //main
@@ -61,6 +62,7 @@ long int	get_time(void);
 void		*routine(t_philo *philo);
 void		eat(t_philo *philo);
 void		sleep_think(t_philo *philo);
-int			check_dead(t_philo *philo);
+int			check_dead(t_philo *philo, int i);
+int			print_status(t_philo *philo, char *s);
 
 #endif
