@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/27 17:06:55 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:34:57 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	main(int ac, char **av)
 		while (++i < params.num_philo)
 			if (params.philo[i].dead == 1)
 				d = 1;
+			// if (get_time() - params.philo[i].last_ate > params.time_to_die)
 	}
-	usleep(1000);
+	usleep(500000); // comprobacion de q todos los hilos han terminado
 	ft_free(&params);
 	return (0);
 }

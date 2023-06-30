@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:17:01 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/27 17:12:38 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:36:27 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	eat(t_philo *philo)
 {
 	long long int	t;
 
-	t = get_time() + philo->params->time_to_eat;
 	pthread_mutex_lock(&philo->params->forks[philo->l_fork]);
 	print_status(philo, "has taken a fork");
+	//checkear q no s'ha mort mentre espera a agafar l'altre forquilla (pots fer flag del 
+	//status de un filo i fer un while el del altre costat esta menjant doncs anar checkejant si mor)
 	pthread_mutex_lock(&philo->params->forks[philo->r_fork]);
 	print_status(philo, "has taken a fork");
 	print_status(philo, "is eating");
+	t = get_time() + philo->params->time_to_eat;
 	philo->last_ate = get_time();
 	while (get_time() <= t && !check_dead(philo, 0))
 		usleep(200);
@@ -44,8 +46,8 @@ void	sleep_think(t_philo *philo)
 {
 	long long int	t;
 
-	t = get_time() + philo->params->time_to_sleep;
 	print_status(philo, "is sleeping");
+	t = get_time() + philo->params->time_to_sleep;
 	while (get_time() <= t && !check_dead(philo, 0))
 		usleep(200);
 	if (!check_dead(philo, 0))
@@ -61,7 +63,6 @@ int	check_dead(t_philo *philo, int i)
 	{
 		if (i == 1)
 			print_status(philo, "died");
-		// philo->params->dead = 1;
 		philo->dead = 1;
 		return (1);
 	}
@@ -72,12 +73,8 @@ int	print_status(t_philo *philo, char *s)
 {
 	pthread_mutex_lock(&philo->params->print);
 	printf("%li %i %s\n", (get_time() - philo->params->start), philo->num, s);
-	pthread_mutex_unlock(&philo->params->print);
+	if (philo->dead != 1)
+		pthread_mutex_unlock(&philo->params->print);
 	return (0);
 }
 
-// int	die(t_params *params)
-// {
-// 	//posar el kill count desde params directament aixi no es necessita mutex pel kc
-// 	// ???? preguntarho
-// }

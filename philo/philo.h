@@ -25,7 +25,7 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	int				num;
-	long int		last_ate;
+	long long int	last_ate;
 	long int		ate_count;
 	int				l_fork;
 	int				r_fork;
