@@ -6,12 +6,13 @@
 #    By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 16:35:08 by ccaballe          #+#    #+#              #
-#    Updated: 2023/06/15 17:21:15 by ccaballe         ###   ########.fr        #
+#    Updated: 2023/07/05 16:14:11 by ccaballe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror -MMD
+CFLAGS = -Wall -Wextra -Werror -MMD 
+# CFLAGS += -fsanitize=thread
 SRC = main.c utils.c routines.c
 
 OBJ_DIR = objects/

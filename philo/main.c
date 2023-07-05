@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/30 16:34:57 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:22:43 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,12 @@ int	main(int ac, char **av)
 	if (ac < 5 || ac > 6)
 		return (ft_error("ERROR\nExpected 4 or 5 arguments", &params));
 	//checkear q siguin digits
+	//checkear que no sean 0
+	//protegir prints, mutex inits i gettimeofday :)
 	if (init_params(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
-	int d = 0;
-	while (d == 0)
-	{
-		int i = -1;
-		while (++i < params.num_philo)
-			if (params.philo[i].dead == 1)
-				d = 1;
-			// if (get_time() - params.philo[i].last_ate > params.time_to_die)
-	}
+	check_philos(&params);
 	usleep(500000); // comprobacion de q todos los hilos han terminado
 	ft_free(&params);
 	return (0);

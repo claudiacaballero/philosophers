@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:17:01 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/30 16:36:27 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:30:39 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	eat(t_philo *philo)
 
 	pthread_mutex_lock(&philo->params->forks[philo->l_fork]);
 	print_status(philo, "has taken a fork");
-	//checkear q no s'ha mort mentre espera a agafar l'altre forquilla (pots fer flag del 
-	//status de un filo i fer un while el del altre costat esta menjant doncs anar checkejant si mor)
 	pthread_mutex_lock(&philo->params->forks[philo->r_fork]);
 	print_status(philo, "has taken a fork");
+	//mutex para q no pueda comer y dormir a la vez (lock print update unlock)
 	print_status(philo, "is eating");
 	t = get_time() + philo->params->time_to_eat;
 	philo->last_ate = get_time();
@@ -61,9 +60,9 @@ int	check_dead(t_philo *philo, int i)
 	t = get_time() - philo->last_ate;
 	if (t > philo->params->time_to_die)
 	{
+		philo->dead = 1;
 		if (i == 1)
 			print_status(philo, "died");
-		philo->dead = 1;
 		return (1);
 	}
 	return (0);

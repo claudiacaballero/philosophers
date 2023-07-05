@@ -53,10 +53,10 @@ int			create_threads(t_params *params);
 
 //utils
 long int	ft_atol(char *str);
-void		free_list(t_params *params);
 int			ft_error(char *s, t_params *params);
 void		ft_free(t_params *params);
 long int	get_time(void);
+int			check_philos(t_params *params);
 
 //routines
 void		*routine(t_philo *philo);

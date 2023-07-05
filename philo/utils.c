@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:33:16 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/06/30 16:12:33 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:16:05 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,25 @@ long int	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+int	check_philos(t_params *params)
+{
+	int	d;
+	int	i;
+
+	d = 0;
+	while (d == 0)
+	{
+		i = -1;
+		while (++i < params->num_philo)
+		{
+			if (check_dead(&params->philo[i], 1))
+			{
+				d = 1;
+				break ;
+			}
+		}
+	}
+	return (1);
 }
