@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:33:16 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/05 16:16:05 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:45:57 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	ft_free(t_params *params)
 	free(params->philo);
 	i = -1;
 	while (++i < params->num_philo)
-		pthread_mutex_unlock(&params->forks[i]);
-	// pthread_mutex_unlock(&params->print);
+		pthread_mutex_destroy(&params->forks[i]);
+	pthread_mutex_destroy(&params->print);
 	free(params->forks);
 }
 
