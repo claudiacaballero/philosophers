@@ -27,10 +27,11 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				num;
 	long long int	last_ate;
-	long int		ate_count;
+	int				ate_count;
 	int				l_fork;
 	int				r_fork;
 	int				dead;
+	int				done;
 	t_params		*params;
 }	t_philo;
 
@@ -41,7 +42,8 @@ struct s_params
 	long int		time_to_die;
 	long int		time_to_eat;
 	long int		time_to_sleep;
-	long int		number_meals;
+	int				number_meals;
+	int				finished_count;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
@@ -62,13 +64,14 @@ long int	get_time(void);
 
 //checker
 int			valid_args(int ac, char **av);
+int			check_dead(t_philo *philo, int i);
 int			check_philos(t_params *params);
+int			check_finished_philos(t_params *params);
 
 //routines
 void		*routine(t_philo *philo);
 void		eat(t_philo *philo);
 void		sleep_think(t_philo *philo);
-int			check_dead(t_philo *philo, int i);
 int			print_status(t_philo *philo, char *s);
 
 #endif

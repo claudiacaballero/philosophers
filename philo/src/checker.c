@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:46:41 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/06 17:42:32 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:15:02 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,23 @@ int	check_philos(t_params *params)
 				break ;
 			}
 		}
+		if (check_finished_philos(params))
+		{
+			pthread_mutex_lock(&params->print);
+			printf("everyone finished eating\n");
+			break ;
+		}
 	}
+	return (1);
+}
+
+int	check_finished_philos(t_params *params)
+{
+	int	i;
+
+	i = -1;
+	while (++i < params->num_philo)
+		if (!params->philo[i].done)
+			return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:17:01 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/06 17:42:48 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:15:27 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*routine(t_philo *philo)
 	while (!check_dead(philo, 1))
 	{
 		eat(philo);
+		if (philo->ate_count == philo->params->number_meals)
+			philo->done = 1;
 		if (!check_dead(philo, 0))
 			sleep_think(philo);
 	}
@@ -38,6 +40,7 @@ void	eat(t_philo *philo)
 	philo->last_ate = get_time();
 	while (get_time() <= t && !check_dead(philo, 0))
 		usleep(200);
+	philo->ate_count++;
 	pthread_mutex_unlock(&philo->params->forks[philo->l_fork]);
 	pthread_mutex_unlock(&philo->params->forks[philo->r_fork]);
 }

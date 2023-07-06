@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/06 17:42:42 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:20:19 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	main(int ac, char **av)
 
 int	init_params(int ac, char **av, t_params *params)
 {
-
 	params->num_philo = ft_atol(av[1]);
 	params->time_to_die = ft_atol(av[2]);
 	params->time_to_eat = ft_atol(av[3]);
 	params->time_to_sleep = ft_atol(av[4]);
-	params->number_meals = 0;
+	params->number_meals = -1;
+	params->finished_count = 0;
 	pthread_mutex_init(&params->print, NULL);
 	pthread_mutex_init(&params->update, NULL);
 	params->start = get_time();
