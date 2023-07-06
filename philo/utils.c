@@ -6,11 +6,24 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:33:16 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/05 18:45:57 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:06:45 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_isdigit(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] < '0' && s[i] > '9')
+			return (0);
+	}
+	return (1);
+}
 
 long int	ft_atol(char *str)
 {
@@ -40,7 +53,8 @@ long int	ft_atol(char *str)
 int	ft_error(char *s, t_params *params)
 {
 	printf("%s\n", s);
-	ft_free(params);
+	if (params)
+		ft_free(params);
 	return (-1);
 }
 
@@ -53,6 +67,7 @@ void	ft_free(t_params *params)
 	while (++i < params->num_philo)
 		pthread_mutex_destroy(&params->forks[i]);
 	pthread_mutex_destroy(&params->print);
+	pthread_mutex_destroy(&params->update);
 	free(params->forks);
 }
 
@@ -62,25 +77,4 @@ long int	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-int	check_philos(t_params *params)
-{
-	int	d;
-	int	i;
-
-	d = 0;
-	while (d == 0)
-	{
-		i = -1;
-		while (++i < params->num_philo)
-		{
-			if (check_dead(&params->philo[i], 1))
-			{
-				d = 1;
-				break ;
-			}
-		}
-	}
-	return (1);
 }

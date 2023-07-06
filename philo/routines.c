@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:17:01 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/05 16:30:39 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:11:55 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	eat(t_philo *philo)
 	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->params->forks[philo->r_fork]);
 	print_status(philo, "has taken a fork");
-	//mutex para q no pueda comer y dormir a la vez (lock print update unlock)
+	pthread_mutex_lock(&philo->params->update);
 	print_status(philo, "is eating");
 	t = get_time() + philo->params->time_to_eat;
+	pthread_mutex_unlock(&philo->params->update);
 	philo->last_ate = get_time();
 	while (get_time() <= t && !check_dead(philo, 0))
 		usleep(200);
@@ -53,27 +54,11 @@ void	sleep_think(t_philo *philo)
 		print_status(philo, "is thinking");
 }
 
-int	check_dead(t_philo *philo, int i)
-{
-	long long int	t;
-
-	t = get_time() - philo->last_ate;
-	if (t > philo->params->time_to_die)
-	{
-		philo->dead = 1;
-		if (i == 1)
-			print_status(philo, "died");
-		return (1);
-	}
-	return (0);
-}
-
 int	print_status(t_philo *philo, char *s)
 {
 	pthread_mutex_lock(&philo->params->print);
-	printf("%li %i %s\n", (get_time() - philo->params->start), philo->num, s);
+	printf("%04li\t%i\t%s\n", (get_time() - philo->params->start), philo->num, s);
 	if (philo->dead != 1)
 		pthread_mutex_unlock(&philo->params->print);
 	return (0);
 }
-

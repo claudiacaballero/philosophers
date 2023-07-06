@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/05 16:22:43 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:11:13 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	main(int ac, char **av)
 {
 	t_params	params;
 
-	if (ac < 5 || ac > 6)
-		return (ft_error("ERROR\nExpected 4 or 5 arguments", &params));
-	//checkear q siguin digits
-	//checkear que no sean 0
+	if (!valid_args(ac, av))
+		return (ft_error("ERROR\nPlease enter 4 or 5 positive integers", NULL));
 	//protegir prints, mutex inits i gettimeofday :)
 	if (init_params(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
@@ -39,6 +37,7 @@ int	init_params(int ac, char **av, t_params *params)
 	params->time_to_sleep = ft_atol(av[4]);
 	params->number_meals = 0;
 	pthread_mutex_init(&params->print, NULL);
+	pthread_mutex_init(&params->update, NULL);
 	params->start = get_time();
 	if (ac == 6)
 		params->number_meals = ft_atol(av[5]);

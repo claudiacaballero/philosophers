@@ -44,6 +44,7 @@ struct s_params
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	update;
 };
 
 //main
@@ -52,10 +53,14 @@ int			init_arrays(t_params *params);
 int			create_threads(t_params *params);
 
 //utils
+int			ft_isdigit(char *s);
 long int	ft_atol(char *str);
 int			ft_error(char *s, t_params *params);
 void		ft_free(t_params *params);
 long int	get_time(void);
+
+//checker
+int			valid_args(int ac, char **av);
 int			check_philos(t_params *params);
 
 //routines

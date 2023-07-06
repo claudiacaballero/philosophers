@@ -6,14 +6,14 @@
 #    By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 16:35:08 by ccaballe          #+#    #+#              #
-#    Updated: 2023/07/05 19:08:44 by ccaballe         ###   ########.fr        #
+#    Updated: 2023/07/06 17:05:29 by ccaballe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CFLAGS = -Wall -Wextra -Werror -MMD 
 # CFLAGS += -fsanitize=thread
-SRC = main.c utils.c routines.c
+SRC = main.c utils.c routines.c checker.c
 
 OBJ_DIR = objects/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
