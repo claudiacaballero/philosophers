@@ -6,11 +6,11 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:46:41 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/06 17:12:14 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:42:32 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	valid_args(int ac, char **av)
 {
@@ -23,7 +23,8 @@ int	valid_args(int ac, char **av)
 	{
 		if (!ft_isdigit(av[i]))
 			return (0);
-		else if (ft_atol(av[i]) <= 0)
+		else if (ft_atol(av[i]) <= 0 || ft_atol(av[i]) < INT_MIN \
+			|| ft_atol(av[i]) > INT_MAX)
 			return (0);
 	}
 	return (1);
