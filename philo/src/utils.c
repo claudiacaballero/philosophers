@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:33:16 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/06 17:42:51 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:24:23 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_isdigit(char *s)
 	i = -1;
 	while (s[++i])
 	{
-		if (s[i] < '0' && s[i] > '9')
+		if (s[i] < '0' || s[i] > '9')
 			return (0);
 	}
 	return (1);
@@ -68,6 +68,7 @@ void	ft_free(t_params *params)
 		pthread_mutex_destroy(&params->forks[i]);
 	pthread_mutex_destroy(&params->print);
 	pthread_mutex_destroy(&params->update);
+	pthread_mutex_destroy(&params->done);
 	free(params->forks);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/06 18:20:19 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:02:12 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
 	check_philos(&params);
-	usleep(500000); // comprobacion de q todos los hilos han terminado
+	// usleep(500000); // comprobacion de q todos los hilos han terminado
 	ft_free(&params);
 	return (0);
 }
@@ -36,8 +36,10 @@ int	init_params(int ac, char **av, t_params *params)
 	params->time_to_sleep = ft_atol(av[4]);
 	params->number_meals = -1;
 	params->finished_count = 0;
+	params->any_dead = 0;
 	pthread_mutex_init(&params->print, NULL);
 	pthread_mutex_init(&params->update, NULL);
+	pthread_mutex_init(&params->done, NULL);
 	params->start = get_time();
 	if (ac == 6)
 		params->number_meals = ft_atol(av[5]);
@@ -80,11 +82,13 @@ int	create_threads(t_params *params)
 	int	i;
 
 	i = -1;
+	pthread_mutex_lock(&params->update);
 	while (++i < params->num_philo)
 	{
 		pthread_create(&params->philo[i].thread, NULL, \
 			(void *)routine, &params->philo[i]);
-		usleep(100);
+		// usleep(100);
 	}
+	pthread_mutex_unlock(&params->update);
 	return (0);
 }

@@ -44,10 +44,12 @@ struct s_params
 	long int		time_to_sleep;
 	int				number_meals;
 	int				finished_count;
+	int				any_dead;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	update;
+	pthread_mutex_t	done;
 };
 
 //main
@@ -70,7 +72,7 @@ int			check_finished_philos(t_params *params);
 
 //routines
 void		*routine(t_philo *philo);
-void		eat(t_philo *philo);
+int			eat(t_philo *philo);
 void		sleep_think(t_philo *philo);
 int			print_status(t_philo *philo, char *s);
 
