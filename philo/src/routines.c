@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:17:01 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/11 17:11:25 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:27:57 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	print_status(t_philo *philo, char *s)
 	pthread_mutex_lock(&philo->params->print);
 	pthread_mutex_lock(&philo->params->done);
 	if (!philo->params->any_dead)
-		printf("%04li\t%i\t%s\n", (get_time() - philo->params->start), philo->num, s);
-	// if (philo->dead != 1)
+		printf("%04li\t%i\t%s\n", (get_time() - \
+			philo->params->start), philo->num, s);
 	pthread_mutex_unlock(&philo->params->done);
 	pthread_mutex_unlock(&philo->params->print);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ccaballe <ccaballe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:40:32 by ccaballe          #+#    #+#             */
-/*   Updated: 2023/07/11 17:02:12 by ccaballe         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:27:40 by ccaballe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ int	main(int ac, char **av)
 
 	if (!valid_args(ac, av))
 		return (ft_error("ERROR\nPlease enter 4 or 5 positive integers", NULL));
-	//protegir prints, mutex inits i gettimeofday :)
 	if (init_params(ac, av, &params) == -1)
 		return (ft_error("ERROR\nCould not allocate memory", &params));
 	create_threads(&params);
 	check_philos(&params);
-	// usleep(500000); // comprobacion de q todos los hilos han terminado
 	ft_free(&params);
 	return (0);
 }
@@ -87,7 +85,6 @@ int	create_threads(t_params *params)
 	{
 		pthread_create(&params->philo[i].thread, NULL, \
 			(void *)routine, &params->philo[i]);
-		// usleep(100);
 	}
 	pthread_mutex_unlock(&params->update);
 	return (0);
